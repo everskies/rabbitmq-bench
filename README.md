@@ -12,6 +12,6 @@
 `docker-compose up bench-old`
 
 ##### Manual Benchmark
-`go run /opt/app/main.go [uri] [threads]`
+`bench/rabbitmq-bench [uri] [threads]`
 Example:
-`go run /opt/app/main.go go amqp://test:testtest@rabbitmq-old:5672/ 500`
+`bench/rabbitmq-bench amqp://test:testtest@localhost:5673/ 500`
