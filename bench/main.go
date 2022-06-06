@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"time"
+	"strconv"
 	"runtime"
 
 	"github.com/streadway/amqp"
@@ -43,7 +44,7 @@ func publishLoop(c chan<- int) {
 }
 
 func poll(input <-chan int) {
-	cache := make([]int, 0, 1000)
+	cache := make([]int, 0, 10000)
 	tick := time.NewTicker(1000 * time.Millisecond)
 
 	for {
@@ -71,9 +72,10 @@ func poll(input <-chan int) {
 
 func main() {
 	messages := make(chan int)
-	threads := 500
-	go poll(messages)
+	threadsArg, _ := strconv.ParseInt(os.Args[1:][1], 10, 32)
+	threads := int(threadsArg)
 
+	go poll(messages)
 	for i := 0; i < threads; i++ {
 		go publishLoop(messages)
 	}

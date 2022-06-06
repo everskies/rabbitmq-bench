@@ -10,3 +10,8 @@
 
 ##### Benchmark RabbitMQ 3.7.28:
 `docker-compose up bench-old`
+
+##### Manual Benchmark
+`go run /opt/app/main.go [uri] [threads]`
+Example:
+`go run /opt/app/main.go go amqp://test:testtest@rabbitmq-old:5672/ 500`
