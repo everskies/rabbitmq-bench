@@ -1,0 +1,32 @@
+version: '3.4'
+
+services:
+ rabbitmq-new:
+  build:
+    context: rabbitmq-new/
+  hostname: rabbitmq-new
+  ports:
+   - 5672:5672
+   - 15672:15672
+
+ rabbitmq-old:
+  build:
+    context: rabbitmq-old/
+  hostname: rabbitmq-old
+  ports:
+   - 5673:5672
+   - 15673:15672
+
+ bench-new:
+  build:
+    context: bench/
+  profiles:
+    - donotstart
+  command: go run /opt/app/main.go amqp://test:testtest@rabbitmq-new:5672/
+
+ bench-old:
+  build:
+    context: bench/
+  profiles:
+    - donotstart
+  command: go run /opt/app/main.go amqp://test:testtest@rabbitmq-old:5672/
