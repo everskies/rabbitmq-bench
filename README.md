@@ -1,4 +1,4 @@
-# RabbitMQ Churn Benckmark
+# RabbitMQ Churn Benchmark
 
 ### Benchmark to compare maximum churn capacity between two RabbitMQ versions
 
